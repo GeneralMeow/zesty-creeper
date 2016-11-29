@@ -3,11 +3,7 @@
 
 ## Description
 
-Complete a to do list app with database, using express.
-
-## Context
-
-Create a full stack to do list web app.
+Create a full stack to do list web app, using Express.
 
 #### Goals
 - Learn how front end and back end connect.
@@ -18,7 +14,7 @@ Create a full stack to do list web app.
 ## Specifications
 
 
-#### The App: As a user...
+#### The App: 
 
 - [ ] I can create to do list items.
 - [ ] I can delete unwanted to do list items.

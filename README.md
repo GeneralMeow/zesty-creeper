@@ -21,9 +21,6 @@ Create a full stack to do list web app, using Express.
 - [ ] I can check items off as completed.
 - [ ] I can rearrange to do list items. 
 - [ ] I can edit the text on existing to do's.
-
-#### Additional Specs:
-
 - [ ] Create the back end using node and express.
 - [ ] Create a database of to do list items.
 - [ ] The artifact produced is properly licensed, preferably with the [MIT license](https://opensource.org/licenses/MIT).

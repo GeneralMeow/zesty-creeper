@@ -4,15 +4,15 @@ CREATE DATABASE todolist;
 \c todolist;
 
 CREATE TABLE "lists" (
-  "ID" SERIAL PRIMARY KEY,
-  "name" VARCHAR
+  id SERIAL PRIMARY KEY,
+  name VARCHAR
 );
 
 CREATE TABLE "tasks" (
-  "ID" SERIAL PRIMARY KEY,
-  "text" VARCHAR,
-  "completed" VARCHAR,
-  "complete_date" date
+  id SERIAL PRIMARY KEY,
+  description VARCHAR,
+  completed VARCHAR,
+  complete_date date
 );
 
 INSERT INTO "lists" (name)
@@ -22,4 +22,4 @@ INSERT INTO "lists" (name)
 -- Foreign Keys
 -- ---
 
-ALTER TABLE "lists" ADD FOREIGN KEY ("ID") REFERENCES "lists" ("ID");
+ALTER TABLE "lists" ADD FOREIGN KEY ("id") REFERENCES "lists" ("id");

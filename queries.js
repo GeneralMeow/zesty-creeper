@@ -13,12 +13,14 @@ var db = pgp(connectionString);
 function getAllLists(req, res, next) {
   db.any('select * from lists')
     .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ALL lists'
-        });
+
+      res.render('index');
+      // res.status(200)
+      //   .json({
+      //     status: 'success',
+      //     data: data,
+      //     message: 'Retrieved ALL lists'
+        // });
     })
     .catch(function (err) {
       return next(err);
@@ -89,9 +91,9 @@ function removeList(req, res, next) {
 }
 
 module.exports = {
-  getAllLists: getAllLists,
-  getSingleList: getSingleList,
-  createList: createList,
-  updateList: updateList,
-  removeList: removeList
+  getAllLists,
+  getSingleList,
+  createList,
+  updateList,
+  removeList
 };

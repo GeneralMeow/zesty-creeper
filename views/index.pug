@@ -1,5 +1,22 @@
-extends layout
+//- extends layout
+//-
+//- //- block content
+//- //-   h1= title
+//- //-   p Welcome to #{title}
 
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+  body
+    h1  Zesty-Creeper Todo List
+    p
+      input#task
+      button#add  What chu need to get done?
+    hr
+    #todos
+    script(src='../index.js')
+
+    //- form(method= post)
+    //-   input( type= text)
+    //-   input( type = submit)

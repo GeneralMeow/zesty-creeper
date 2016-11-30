@@ -5,6 +5,9 @@ const db = require('../queries');
 
 router.get('/lists', db.getAllLists);
 router.get('/lists/:id', db.getSingleList);
+router.post('/lists', db.createList);
+router.put('/lists/:id', db.updateList);
+router.delete('/lists/:id', db.removeList);
 
 
 

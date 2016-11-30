@@ -33,7 +33,7 @@ function getSingleList(req, res, next) {
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved ONE puppy'
+          message: 'Retrieved ONE list'
         });
     })
     .catch(function (err) {
@@ -41,10 +41,57 @@ function getSingleList(req, res, next) {
     });
 }
 
+function createList(req, res, next) {
+  db.none('insert into lists(name)' +
+      'values(${name})',
+    req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one list'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
+function updateList(req, res, next) {
+  db.none('update lists set name=$1', [req.body.name])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated list'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
+function removeList(req, res, next) {
+  var listID = parseInt(req.params.id);
+  db.result('delete from lists where id = $1', listID)
+    .then(function (result) {
+      /* jshint ignore:start */
+      res.status(200)
+        .json({
+          status: 'success',
+          message: `Removed ${result.rowCount} list`
+        });
+      /* jshint ignore:end */
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 module.exports = {
   getAllLists: getAllLists,
-  getSingleList: getSingleList
+  getSingleList: getSingleList,
+  createList: createList,
+  updateList: updateList,
+  removeList: removeList
 };

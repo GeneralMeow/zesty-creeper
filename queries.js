@@ -11,52 +11,45 @@ var db = pgp(connectionString);
 
 
 function getAllLists(req, res, next) {
-  db.any('select * from lists')
-    .then(function (data) {
 
-      res.render('index');
-      // res.status(200)
-      //   .json({
-      //     status: 'success',
-      //     data: data,
-      //     message: 'Retrieved ALL lists'
-        // });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+  return db.any('select * from lists')
+  // db.any('select * from lists')
+  //   .then(function (data) {
+  //
+  //     res.render('index');
+  //     // res.status(200)
+  //     //   .json({
+  //     //     status: 'success',
+  //     //     data: data,
+  //     //     message: 'Retrieved ALL lists'
+  //       // });
+  //   })
+  //   .catch(function (err) {
+  //     return next(err);
+  //   });
 }
 
-function getSingleList(req, res, next) {
-  var listID = parseInt(req.params.id);
-  db.one('select * from lists where id = $1', listID)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ONE list'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
+const tasksForList = id =>
+  db.any( 'select * from tasks where list_id = $1', id )
 
-function createList(req, res, next) {
-  db.none('insert into lists(name)' +
-      'values(${name})',
-    req.body)
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Inserted one list'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+// function getSingleList(req, res, next) {
+//   var listID = parseInt(req.params.id);
+//   db.one('select * from lists where id = $1', listID)
+//     .then(function (data) {
+//       res.status(200)
+//         .json({
+//           status: 'success',
+//           data: data,
+//           message: 'Retrieved ONE list'
+//         });
+//     })
+//     .catch(function (err) {
+//       return next(err);
+//     });
+// }
+
+function createTask(description, list_id) {
+  return db.none('insert into tasks(description, list_id) values($1, $2)', [description, list_id])
 }
 
 function updateList(req, res, next) {
@@ -73,15 +66,15 @@ function updateList(req, res, next) {
     });
 }
 
-function removeList(req, res, next) {
-  var listID = parseInt(req.params.id);
-  db.result('delete from lists where id = $1', listID)
+function removeTask(req, res, next) {
+  var taskID = parseInt(req.params.id);
+  db.result('delete from tasks where id = $1', taskID)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} list`
+          message: `Removed ${result.rowCount} task`
         });
       /* jshint ignore:end */
     })
@@ -92,8 +85,8 @@ function removeList(req, res, next) {
 
 module.exports = {
   getAllLists,
-  getSingleList,
-  createList,
+  createTask,
   updateList,
-  removeList
+  removeTask,
+  tasksForList
 };

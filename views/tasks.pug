@@ -1,0 +1,40 @@
+//- extends layout
+//-
+//- //- block content
+//- //-   h1= title
+//- //-   p Welcome to #{title}
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+  body
+    h1  Zesty-Creeper Todo List
+    p
+      //-button#add(onclick='add()')  What chu need to get done?
+      form(role='form', action=`/lists/${id}`, method="post", style='max-width: 300px;')
+        input#task(name="description")
+        button.btn.btn-default(type='submit') Submit
+
+    hr
+
+    #todos
+      table
+        tbody
+          each task in tasks
+            tr
+              td= task.description
+              td
+                input(type='checkbox', completed=task.completed)
+                button.btn-danger(type='delete') Delete dat shiet.
+    //- script(src='../index.js')
+    //- tbody
+      //- div.container
+        //- div.row
+          //- div.h4.col-sm-3
+
+
+
+    //- form(method= post)
+    //-   input( type= text)
+    //-   input( type = submit)

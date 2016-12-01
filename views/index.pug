@@ -11,12 +11,9 @@ html(lang='en')
   body
     h1  Zesty-Creeper Todo List
     p
-      input#task
-      button#add  What chu need to get done?
-    hr
-    #todos
-    script(src='../index.js')
+      //-button#add(onclick='add()')  What chu need to get done?
+      form(role='form', action=`/lists/${id}`, method="post", style='max-width: 300px;')
+        input#task(name="description")
+        button.btn.btn-default(type='submit') Submit
 
-    //- form(method= post)
-    //-   input( type= text)
-    //-   input( type = submit)
+    hr

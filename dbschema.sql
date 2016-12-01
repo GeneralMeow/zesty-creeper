@@ -10,6 +10,7 @@ CREATE TABLE "lists" (
 
 CREATE TABLE "tasks" (
   id SERIAL PRIMARY KEY,
+  list_id SERIAL REFERENCES lists,
   description VARCHAR,
   completed VARCHAR,
   complete_date date
@@ -22,4 +23,4 @@ INSERT INTO "lists" (name)
 -- Foreign Keys
 -- ---
 
-ALTER TABLE "lists" ADD FOREIGN KEY ("id") REFERENCES "lists" ("id");
+-- ALTER TABLE "tasks" ADD FOREIGN KEY ("list_id") REFERENCES "lists" ("id");

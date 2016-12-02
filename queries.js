@@ -66,21 +66,11 @@ function updateList(req, res, next) {
     });
 }
 
-function removeTask(req, res, next) {
-  var taskID = parseInt(req.params.id);
+function removeTask(taskID) {
   db.result('delete from tasks where id = $1', taskID)
-    .then(function (result) {
-      /* jshint ignore:start */
-      res.status(200)
-        .json({
-          status: 'success',
-          message: `Removed ${result.rowCount} task`
-        });
-      /* jshint ignore:end */
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+  .then(result => {
+    console.log('remove task result',result)
+    return {status: result.command}})
 }
 
 module.exports = {

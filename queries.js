@@ -13,20 +13,6 @@ var db = pgp(connectionString);
 function getAllLists(req, res, next) {
 
   return db.any('select * from lists')
-  // db.any('select * from lists')
-  //   .then(function (data) {
-  //
-  //     res.render('index');
-  //     // res.status(200)
-  //     //   .json({
-  //     //     status: 'success',
-  //     //     data: data,
-  //     //     message: 'Retrieved ALL lists'
-  //       // });
-  //   })
-  //   .catch(function (err) {
-  //     return next(err);
-  //   });
 }
 
 const tasksForList = id =>
@@ -66,11 +52,12 @@ function updateList(req, res, next) {
     });
 }
 
-function removeTask(taskID) {
-  db.result('delete from tasks where id = $1', taskID)
+function removeTask(task_id, response) {
+  console.log("im a pretty princess")
+  db.none('delete from tasks where id = $1', task_id)
   .then(result => {
-    console.log('remove task result',result)
-    return {status: result.command}})
+    return result
+  })
 }
 
 module.exports = {

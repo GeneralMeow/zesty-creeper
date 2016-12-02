@@ -45,10 +45,8 @@ router.get('/lists/:list_id/:task_id', (request, response) => {
   // console.log('your params task then list', task_id, list_id)
 
   db.removeTask( task_id )
-    .then(result => {
-      console.log('got back to route',result)
-      return response.redirect('/lists/'+list_id)})
-})
+    response.redirect('/lists/'+list_id)})
+
 
 // /* GET home page. */
 // router.get('/', function(req, res, next) {

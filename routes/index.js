@@ -40,11 +40,14 @@ router.post( '/lists/:id', (request, response) => {
 
 router.put('/lists/:id', db.updateList)
 
-router.delete('/lists/:id', (request, response) => {
-  const { id } = request.params
+router.get('/lists/:list_id/:task_id', (request, response) => {
+  const { task_id, list_id } = request.params
+  // console.log('your params task then list', task_id, list_id)
 
-  db.removeTask( id )
-    .then(task => response.redirect( `/lists/${id}`))
+  db.removeTask( task_id )
+    .then(result => {
+      console.log('got back to route',result)
+      return response.redirect('/lists/'+list_id)})
 })
 
 // /* GET home page. */

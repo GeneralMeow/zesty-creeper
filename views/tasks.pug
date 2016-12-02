@@ -26,7 +26,7 @@ html(lang='en')
               td= task.description
               td
                 input(type='checkbox', completed=task.completed)
-                button.btn-danger(type='delete') Delete dat shiet.
+                a(href=`/lists/${task.list_id}/${task.id}`) Delete dat shiet.
     //- script(src='../index.js')
     //- tbody
       //- div.container
